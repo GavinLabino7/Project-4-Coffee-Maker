@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import edu.towson.cis.cosc442.project4.coffeemaker.CoffeeMaker;
 import edu.towson.cis.cosc442.project4.coffeemaker.Inventory;
@@ -18,9 +20,12 @@ public class CoffeeMakerTest {
     Inventory inventory;
     Recipe recipe1;
     Recipe recipe2;
+    Recipe recipe3;
+    Recipe recipe4;
+    Recipe recipe5;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         coffeeMaker = new CoffeeMaker();
         inventory = new Inventory();
 
@@ -35,48 +40,61 @@ public class CoffeeMakerTest {
         recipe2 = new Recipe();
         recipe2.setName("Coffee2");
         recipe2.setPrice(4);
-    } 
+
+        recipe3 = new Recipe();
+        recipe3.setName("Coffee3");
+
+        recipe4 = new Recipe();
+        recipe4.setName("Coffee4");
+
+        recipe5 = new Recipe();
+        recipe5.setName("Coffee5");
+    }
 
     @AfterEach
-    void teardown(){
+    void teardown() {
         coffeeMaker = null;
         inventory = null;
         recipe1 = null;
         recipe2 = null;
-    } 
+        recipe3 = null;
+        recipe4 = null;
+        recipe5 = null;
+    }
 
-    @Test
-    void testAddInventory() {
+    @ParameterizedTest
+    @CsvSource({
+        "-10, 10, 10, 10",
+        "10, -10, 10, 10",
+        "10, 10, -10, 10",
+        "10, 10, 10, -10"
+    })
+    void testAddInventory(int coffee, int milk, int sugar, int choco) {
 
-        assertTrue(coffeeMaker.addInventory(10, 4, -3, 7));
-        assertFalse(coffeeMaker.addInventory(10, 4, 6, 7));
-        assertFalse(coffeeMaker.addInventory(-1, 4, -1, 7));
+        assertTrue(coffeeMaker.addInventory(10, 4, 3, 7));
+        assertFalse(coffeeMaker.addInventory(coffee, milk, sugar, choco));
 
     }
 
     @Test
     void testAddRecipe() {
 
-        coffeeMaker.addRecipe(recipe1);
+        assertTrue(coffeeMaker.addRecipe(recipe1));
         Recipe[] arr = coffeeMaker.getRecipes();
-        assertEquals(recipe1, arr[3]);
-
-        coffeeMaker.addRecipe(recipe1);
-        arr = coffeeMaker.getRecipes();
-        assertEquals(recipe1, arr[2]);
-
-        coffeeMaker.addRecipe(recipe1);
-        arr = coffeeMaker.getRecipes();
-        assertEquals(recipe1, arr[1]);
-
-        coffeeMaker.addRecipe(recipe1);
-        arr = coffeeMaker.getRecipes();
         assertEquals(recipe1, arr[0]);
 
         assertFalse(coffeeMaker.addRecipe(recipe1));
 
-    }
+        assertTrue(coffeeMaker.addRecipe(recipe2));
+        arr = coffeeMaker.getRecipes();
+        assertEquals(recipe2, arr[1]);
 
+        coffeeMaker.addRecipe(recipe3);
+        coffeeMaker.addRecipe(recipe4);
+
+        assertFalse(coffeeMaker.addRecipe(recipe5));
+
+    }
 
     @Test
     void testCheckInventory() {
@@ -86,45 +104,57 @@ public class CoffeeMakerTest {
     @Test
     void testDeleteRecipe() {
 
-        coffeeMaker.addRecipe(recipe1);
-        Recipe[] arr = coffeeMaker.getRecipes();
-        assertEquals(recipe1, arr[3]);
-        assertTrue(coffeeMaker.deleteRecipe(recipe1));
+    coffeeMaker.addRecipe(recipe1);
 
-        assertFalse(coffeeMaker.deleteRecipe(recipe2));
+    assertTrue(coffeeMaker.deleteRecipe(recipe1));
+
+    assertFalse(coffeeMaker.deleteRecipe(recipe1));
+
+    assertFalse(coffeeMaker.deleteRecipe(recipe2));
+
+    assertFalse(coffeeMaker.deleteRecipe(null));
 
     }
 
     @Test
     void testEditRecipe() {
 
-        coffeeMaker.addRecipe(recipe1);
-        assertTrue(coffeeMaker.editRecipe(recipe2, recipe1));
-        assertFalse(coffeeMaker.editRecipe(recipe1, recipe2));
+    coffeeMaker.addRecipe(recipe1);
+    coffeeMaker.addRecipe(recipe1);
+
+    assertTrue(coffeeMaker.editRecipe(recipe1, recipe2));
+    assertEquals(recipe2, coffeeMaker.getRecipes()[1]);
+
+    assertFalse(coffeeMaker.editRecipe(recipe1, recipe2));
+
+    coffeeMaker.addRecipe(recipe1);
+    assertFalse(coffeeMaker.editRecipe(recipe2, recipe1));
 
     }
 
     @Test
     void testGetRecipeForName() {
-
+        
         coffeeMaker.addRecipe(recipe1);
         assertEquals(recipe1, coffeeMaker.getRecipeForName("Coffee1"));
+        assertNotNull(coffeeMaker.getRecipeForName("Coffee3"));
 
     }
 
     @Test
     void testGetRecipes() {
-
         assertNotNull(coffeeMaker.getRecipes());
-
     }
 
     @Test
     void testMakeCoffee() {
 
-        assertEquals(5, coffeeMaker.makeCoffee(recipe1, 5));
-        assertTrue(coffeeMaker.addInventory(15, 15, -3, 15));
-        assertEquals(0, coffeeMaker.makeCoffee(recipe2, 4));
+    assertEquals(4, coffeeMaker.makeCoffee(recipe1, 4));
+
+    coffeeMaker.addInventory(25, 15, 15, 15);
+    assertEquals(0, coffeeMaker.makeCoffee(recipe1, 5));
+    assertEquals(0, coffeeMaker.makeCoffee(recipe2, 4));
+    assertEquals(0, coffeeMaker.makeCoffee(recipe2, 4));
 
     }
 }
