@@ -1,66 +1,118 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import edu.towson.cis.cosc442.project4.coffeemaker.Inventory;
+import edu.towson.cis.cosc442.project4.coffeemaker.Recipe;
 
 public class InventoryTest {
 
+Inventory inventory;
+Recipe recipe;
+
 @BeforeEach
     void setup(){
-
+        inventory = new Inventory();
+        recipe = new Recipe();
     } 
 
     @AfterEach
     void teardown(){
-        
+        inventory = null;
+        recipe = null;
     }
 
-    @Test
-    void testEnoughIngredients() {
+    @ParameterizedTest 
+    @CsvSource({
+        "16,15,15,15",
+        "15,16,15,15",
+        "15,15,16,15",
+        "15,15,15,16"
+    }) 
+    void testEnoughIngredientsFalse(int coffee, int milk, int sugar, int chocolate) {
 
-    }
+        recipe.setAmtCoffee(coffee);
+        recipe.setAmtMilk(milk);
+        recipe.setAmtSugar(sugar);
+        recipe.setAmtChocolate(chocolate);
 
-    @Test
-    void testGetChocolate() {
-
-    }
-
-    @Test
-    void testGetCoffee() {
-
-    }
-
-    @Test
-    void testGetMilk() {
-
-    }
-
-    @Test
-    void testGetSugar() {
+        assertFalse(inventory.enoughIngredients(recipe));
 
     }
 
-    @Test
-    void testSetChocolate() {
+    @Test 
+    void testEnoughIngredientsTrue(){
+        recipe.setAmtCoffee(15);
+        recipe.setAmtMilk(15);
+        recipe.setAmtSugar(15);
+        recipe.setAmtChocolate(15);
+
+        assertTrue(inventory.enoughIngredients(recipe));
 
     }
 
-    @Test
-    void testSetCoffee() {
+  @ParameterizedTest 
+    @CsvSource ({
+        "5, 5",
+        "0, 0",
+        "0, -1"
+    })
+    void testSetChocolate(int expected, int total) {
+
+        inventory.setChocolate(total);
+        assertEquals(expected, inventory.getChocolate());
 
     }
 
-    @Test
-    void testSetMilk() {
+    @ParameterizedTest 
+    @CsvSource ({
+        "5, 5",
+        "0, 0",
+        "0, -1"
+    })
+    void testSetCoffee(int expected, int total) {
+
+        inventory.setCoffee(total);
+        assertEquals(expected, inventory.getCoffee());
 
     }
 
-    @Test
-    void testSetSugar() {
+    @ParameterizedTest 
+    @CsvSource ({
+        "5, 5",
+        "0, 0",
+        "0, -1"
+    })
+    void testSetMilk(int expected, int total) {
+
+        inventory.setMilk(total);
+        assertEquals(expected, inventory.getMilk());
 
     }
 
-    @Test
-    void testToString() {
+    @ParameterizedTest 
+    @CsvSource ({
+        "5, 5",
+        "0, 0",
+        "0, -1"
+    })
+    void testSetSugar(int expected, int total) {
 
+        inventory.setSugar(total);
+        assertEquals(expected, inventory.getSugar());
+
+    }
+
+    @Test 
+    void testToString(){
+        assertEquals("Coffee: " + 15 + "\n" + "Milk: " + 15 + "\n" +
+                     "Sugar: " + 15 + "\n" + "Chocolate: " + 15 + "\n", 
+                     inventory.toString());
     }
 }
