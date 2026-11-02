@@ -1,3 +1,7 @@
+package edu.towson.cis.cosc442.project4.coffeemaker;
+
+import edu.towson.cis.cosc442.project4.coffeemaker.Recipe;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,8 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import edu.towson.cis.cosc442.project4.coffeemaker.Recipe;
 
 public class RecipeTest {
 

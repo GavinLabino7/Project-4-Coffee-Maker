@@ -1,3 +1,5 @@
+package edu.towson.cis.cosc442.project4.coffeemaker;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
