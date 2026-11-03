@@ -55,7 +55,7 @@ public class RecipeTest {
     @CsvSource ({
         "5, 5",
         "0, 0",
-        "0, -1"
+        "0, -1",
     })
     void testSetAmtChocolate(int expected, int total) {
 

@@ -69,12 +69,26 @@ public class CoffeeMakerTest {
         "-10, 10, 10, 10",
         "10, -10, 10, 10",
         "10, 10, -10, 10",
-        "10, 10, 10, -10"
+        "10, 10, 10, -10",
+        "-1, 10, 10, 10",
+        "10, -1, 10, 10",
+        "10, 10, -1, 10",
+        "10, 10, 10, -1"
     })
     void testAddInventory(int coffee, int milk, int sugar, int choco) {
 
-        assertTrue(coffeeMaker.addInventory(10, 4, 3, 7));
         assertFalse(coffeeMaker.addInventory(coffee, milk, sugar, choco));
+
+    }
+
+    @Test
+    void testAddInventoryTrue(){
+        assertTrue(coffeeMaker.addInventory(10, 4, 3, 7));
+        assertTrue(coffeeMaker.addInventory(0,0,0,0));
+        assertEquals(19, inventory.getMilk());
+        assertEquals(25, inventory.getCoffee());
+        assertEquals(18, inventory.getSugar());
+        assertEquals(22, inventory.getChocolate());
 
     }
 
@@ -157,6 +171,11 @@ public class CoffeeMakerTest {
     assertEquals(0, coffeeMaker.makeCoffee(recipe1, 5));
     assertEquals(0, coffeeMaker.makeCoffee(recipe2, 4));
     assertEquals(0, coffeeMaker.makeCoffee(recipe2, 4));
+
+        assertEquals(29, inventory.getMilk());
+        assertEquals(20, inventory.getCoffee());
+        assertEquals(29, inventory.getSugar());
+        assertEquals(29, inventory.getChocolate());
 
     }
 }
