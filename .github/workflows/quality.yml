@@ -27,6 +27,10 @@ jobs:
         working-directory: ./CoffeeMaker
         run: chmod +x mvnw && ./mvnw test
 
+      - name: Run PIT mutation testing
+        working-directory: ./CoffeeMaker
+        run: chmod +x mvnw && ./mvnw test-compile org.pitest:pitest-maven:mutationCoverage
+
       # Add PIT mutation testing later
 
       # Add PIT report artifact upload later
