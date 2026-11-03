@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -64,33 +65,35 @@ public class CoffeeMakerTest {
         recipe5 = null;
     }
 
-    // @ParameterizedTest
-    // @CsvSource({
-    //     "-10, 10, 10, 10",
-    //     "10, -10, 10, 10",
-    //     "10, 10, -10, 10",
-    //     "10, 10, 10, -10",
-    //     "-1, 10, 10, 10",
-    //     "10, -1, 10, 10",
-    //     "10, 10, -1, 10",
-    //     "10, 10, 10, -1"
-    // })
-    // void testAddInventory(int coffee, int milk, int sugar, int choco) {
+    @Disabled 
+    @ParameterizedTest
+    @CsvSource({
+        "-10, 10, 10, 10",
+        "10, -10, 10, 10",
+        "10, 10, -10, 10",
+        "10, 10, 10, -10",
+        "-1, 10, 10, 10",
+        "10, -1, 10, 10",
+        "10, 10, -1, 10",
+        "10, 10, 10, -1"
+    })
+    void testAddInventory(int coffee, int milk, int sugar, int choco) {
 
-    //     assertFalse(coffeeMaker.addInventory(coffee, milk, sugar, choco));
+        assertFalse(coffeeMaker.addInventory(coffee, milk, sugar, choco));
 
-    // }
+    }
 
-    // @Test
-    // void testAddInventoryTrue(){
-    //     assertTrue(coffeeMaker.addInventory(10, 4, 3, 7));
-    //     assertTrue(coffeeMaker.addInventory(0,0,0,0));
-    //     assertEquals(19, inventory.getMilk());
-    //     assertEquals(25, inventory.getCoffee());
-    //     assertEquals(18, inventory.getSugar());
-    //     assertEquals(22, inventory.getChocolate());
+    @Disabled 
+    @Test
+    void testAddInventoryTrue(){
+        assertTrue(coffeeMaker.addInventory(10, 4, 3, 7));
+        assertTrue(coffeeMaker.addInventory(0,0,0,0));
+        assertEquals(19, inventory.getMilk());
+        assertEquals(25, inventory.getCoffee());
+        assertEquals(18, inventory.getSugar());
+        assertEquals(22, inventory.getChocolate());
 
-    // }
+    }
 
     @Test
     void testAddRecipe() {
