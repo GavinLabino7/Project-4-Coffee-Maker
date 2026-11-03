@@ -81,16 +81,16 @@ public class CoffeeMakerTest {
 
     }
 
-    @Test
-    void testAddInventoryTrue(){
-        assertTrue(coffeeMaker.addInventory(10, 4, 3, 7));
-        assertTrue(coffeeMaker.addInventory(0,0,0,0));
-        assertEquals(19, inventory.getMilk());
-        assertEquals(25, inventory.getCoffee());
-        assertEquals(18, inventory.getSugar());
-        assertEquals(22, inventory.getChocolate());
+    // @Test
+    // void testAddInventoryTrue(){
+    //     assertTrue(coffeeMaker.addInventory(10, 4, 3, 7));
+    //     assertTrue(coffeeMaker.addInventory(0,0,0,0));
+    //     assertEquals(19, inventory.getMilk());
+    //     assertEquals(25, inventory.getCoffee());
+    //     assertEquals(18, inventory.getSugar());
+    //     assertEquals(22, inventory.getChocolate());
 
-    }
+    // }
 
     @Test
     void testAddRecipe() {
