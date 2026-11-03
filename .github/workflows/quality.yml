@@ -1,3 +1,4 @@
+
 name: CoffeeMaker Quality Checks
 
 on:
@@ -20,10 +21,13 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: maven
+          cache-dependency-path: CoffeeMaker/pom.xml
 
       - name: Run JUnit regression tests
+        working-directory: ./CoffeeMaker
         run: ./mvnw test
 
       # Add PIT mutation testing later
 
       # Add PIT report artifact upload later
+
