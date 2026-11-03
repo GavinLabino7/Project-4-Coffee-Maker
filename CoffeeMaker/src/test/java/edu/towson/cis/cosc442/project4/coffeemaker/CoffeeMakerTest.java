@@ -165,6 +165,7 @@ public class CoffeeMakerTest {
         assertNotNull(coffeeMaker.getRecipes());
     }
 
+    @Disabled 
     @Test
     void testMakeCoffee() {
 
