@@ -65,7 +65,6 @@ public class CoffeeMakerTest {
         recipe5 = null;
     }
 
-    @Disabled 
     @ParameterizedTest
     @CsvSource({
         "-10, 10, 10, 10",
@@ -83,7 +82,6 @@ public class CoffeeMakerTest {
 
     }
 
-    @Disabled 
     @Test
     void testAddInventoryTrue(){
         assertTrue(coffeeMaker.addInventory(10, 4, 3, 7));
@@ -165,7 +163,6 @@ public class CoffeeMakerTest {
         assertNotNull(coffeeMaker.getRecipes());
     }
 
-    @Disabled 
     @Test
     void testMakeCoffee() {
 
