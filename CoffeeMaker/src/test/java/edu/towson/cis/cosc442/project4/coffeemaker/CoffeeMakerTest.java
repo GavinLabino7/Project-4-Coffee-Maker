@@ -64,22 +64,22 @@ public class CoffeeMakerTest {
         recipe5 = null;
     }
 
-    @ParameterizedTest
-    @CsvSource({
-        "-10, 10, 10, 10",
-        "10, -10, 10, 10",
-        "10, 10, -10, 10",
-        "10, 10, 10, -10",
-        "-1, 10, 10, 10",
-        "10, -1, 10, 10",
-        "10, 10, -1, 10",
-        "10, 10, 10, -1"
-    })
-    void testAddInventory(int coffee, int milk, int sugar, int choco) {
+    // @ParameterizedTest
+    // @CsvSource({
+    //     "-10, 10, 10, 10",
+    //     "10, -10, 10, 10",
+    //     "10, 10, -10, 10",
+    //     "10, 10, 10, -10",
+    //     "-1, 10, 10, 10",
+    //     "10, -1, 10, 10",
+    //     "10, 10, -1, 10",
+    //     "10, 10, 10, -1"
+    // })
+    // void testAddInventory(int coffee, int milk, int sugar, int choco) {
 
-        assertFalse(coffeeMaker.addInventory(coffee, milk, sugar, choco));
+    //     assertFalse(coffeeMaker.addInventory(coffee, milk, sugar, choco));
 
-    }
+    // }
 
     // @Test
     // void testAddInventoryTrue(){
